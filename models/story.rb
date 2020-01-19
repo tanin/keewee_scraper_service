@@ -1,5 +1,4 @@
-require 'open-uri'
-require 'nokogiri'
+require File.expand_path '../../services/canonical_url_retriever.rb', __FILE__
 
 class Story
   include Mongoid::Document
@@ -19,15 +18,11 @@ class Story
 
   index({ url: 'text' }, { unique: true, name: 'url_index' })
 
-  #before_validation :assign_url, on: :create
+  before_validation :assign_url, on: :create
 
   protected
 
   def assign_url
-    self.url = page.at('link[rel=canonical]')['href']
-  end
-
-  def page
-    @page ||= Nokogiri::HTML(open(url))
+    self.url = CanonicalUrlRetriever.call(url)
   end
 end
