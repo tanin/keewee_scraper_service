@@ -7,6 +7,7 @@ ENV['RACK_ENV'] = 'test'
 
 require File.expand_path '../../server.rb', __FILE__
 require File.expand_path '../../models/story.rb', __FILE__
+require File.expand_path '../../services/meta_parser.rb', __FILE__
 
 module RSpecMixin
   include Rack::Test::Methods
