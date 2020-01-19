@@ -23,6 +23,7 @@ class Story
   protected
 
   def assign_url
+    # will not pass validation if url already exists
     self.url = CanonicalUrlRetriever.call(url)
   end
 end
