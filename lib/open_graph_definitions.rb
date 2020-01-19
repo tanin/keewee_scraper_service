@@ -25,4 +25,3 @@ class OpenGraph
     end
   end
 end
-

@@ -25,7 +25,6 @@ class Story
 
   def assign_url
     self.url = page.at('link[rel=canonical]')['href']
-    self.scrape_status = 'Pending'
   end
 
   def page

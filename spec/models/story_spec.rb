@@ -1,10 +1,6 @@
 require File.expand_path '../../spec_helper.rb', __FILE__
 
 describe Story do
-  let(:canonical_file) { File.expand_path '../../support/html/canonical.html', __FILE__  }
-  let(:og_file) { File.expand_path '../../support/html/og.html', __FILE__  }
-  let(:no_meta_file) { File.expand_path '../../support/html/no_meta.html', __FILE__  }
-
   describe 'validations' do
     it 'creates record' do
       expect(Story.create!(url: 'http://www.example.com')).to be_persisted
@@ -32,4 +28,5 @@ describe Story do
       expect(Story.new(url: 'http://www.example.com', scrape_status: 'xxx')).to_not be_valid
     end
   end
+
 end
