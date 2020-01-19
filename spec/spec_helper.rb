@@ -6,7 +6,7 @@ require 'byebug'
 ENV['RACK_ENV'] = 'test'
 
 require File.expand_path '../../server.rb', __FILE__
-require File.expand_path '../../models/url.rb', __FILE__
+require File.expand_path '../../models/story.rb', __FILE__
 
 module RSpecMixin
   include Rack::Test::Methods
