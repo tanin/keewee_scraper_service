@@ -3,7 +3,7 @@ class OpenGraph
 
   namespace :og
   url :url, required: true
-  string :type,  required: true, downcase: true, default: "website"
+  string :type, required: true, downcase: true, default: "website"
   string :title, required: true
   url :image, required: true, collection: true
 
