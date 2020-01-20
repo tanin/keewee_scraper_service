@@ -22,10 +22,16 @@ class MetaParser
   end
 
   def page
-    @page ||= OpenGraph.fetch!(url)
+    @page ||=
+      begin
+        OpenGraphReader::Object::Registry.register('og', OpenGraph)
+        OpenGraphReader.fetch!(url)
+      end
   end
 
   def meta_data
+    return if page.nil?
+
     @meta_data ||= {
       url: page.og.url,
       title: page.og.title,
