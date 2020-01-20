@@ -3,6 +3,7 @@ require 'sinatra/json'
 require 'sinatra/strong-params'
 require 'mongoid'
 require 'delayed_job_mongoid'
+require File.expand_path 'models/story.rb'
 require File.expand_path 'serializers/stories/post_story_serializer.rb'
 require File.expand_path 'serializers/stories/stories_serializer.rb'
 
