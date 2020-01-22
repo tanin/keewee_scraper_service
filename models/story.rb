@@ -1,3 +1,4 @@
+require File.expand_path '../../services/meta_parser.rb', __FILE__
 require File.expand_path '../../services/canonical_url_retriever.rb', __FILE__
 
 class Story
@@ -23,10 +24,14 @@ class Story
   before_validation :assign_url, on: :create
 
   def scrape!
-    self.meta_data = MetaParser.call(url)
-    self.scrape_status = result_status
-
-    save!
+    begin
+      self.meta_data = MetaParser.call(url)
+      self.scrape_status = result_status
+    rescue
+      self.scrape_status = 'Error'
+    ensure
+      save!
+    end
   end
 
   protected
