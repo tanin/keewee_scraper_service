@@ -2,7 +2,8 @@ require 'sinatra'
 require 'sinatra/json'
 require 'sinatra/strong-params'
 require 'mongoid'
-require 'delayed_job_mongoid'
+require 'byebug'
+require 'thread'
 require File.expand_path 'models/story.rb'
 require File.expand_path 'serializers/stories/post_story_serializer.rb'
 require File.expand_path 'serializers/stories/stories_serializer.rb'
@@ -31,10 +32,12 @@ end
 
 get '/stories/:id' do |id|
   @story = Story.find(id)
+  $semaphore = Mutex.new
 
   if @story.scrape_status.blank?
-    @story.update(scrape_status: 'Pending')
-    @story.delay.scrape!
+    $semaphore.synchronize { @story.scrape_in_backgrouund }
+
+    @story.update(scrape_status: 'Pending') unless @story.scrape_done?
   end
 
   json StoriesSerializer.new(@story).as_json

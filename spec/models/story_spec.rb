@@ -6,7 +6,7 @@ describe Story do
   end
 
   it 'creates record' do
-    expect(Story.create!(url: 'http://www.example.com')).to be_persisted
+    expect(Story.create!(url: 'https://www.example.com')).to be_persisted
   end
 
   describe 'validations' do

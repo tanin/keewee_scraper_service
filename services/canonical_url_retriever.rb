@@ -23,10 +23,23 @@ class CanonicalUrlRetriever
   def canonical_url
     @canonical_url ||=
       begin
-        page.at('link[rel=canonical]')&.attributes&.dig('href')&.value ||
-        page.at('meta[property="og:url"]')&.attributes&.dig('content')&.value ||
-        url
+        base_scheme = uri_scheme(url)
+
+        temp_url =
+          page.at('link[rel=canonical]')&.attributes&.dig('href')&.value ||
+          page.at('meta[property="og:url"]')&.attributes&.dig('content')&.value ||
+          url
+
+        canonical_url_scheme = uri_scheme(temp_url)
+        temp_url.gsub!(canonical_url_scheme, base_scheme) unless base_scheme == canonical_url_scheme
+
+        temp_url
       end
+  end
+
+  def uri_scheme(url)
+    uri = URI.parse(url)
+    uri.scheme
   end
 
   def page

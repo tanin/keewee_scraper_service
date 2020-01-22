@@ -23,6 +23,18 @@ class Story
 
   before_validation :assign_url, on: :create
 
+  def scrape_in_backgrouund
+    Thread.new do # trivial work thread
+      while true do
+        sleep 0.12
+
+        $semaphore.synchronize do
+          scrape!
+        end
+      end
+    end
+  end
+
   def scrape!
     begin
       self.meta_data = MetaParser.call(url)
@@ -32,6 +44,10 @@ class Story
     ensure
       save!
     end
+  end
+
+  def scrape_done?
+    scrape_status == 'Done'
   end
 
   protected
