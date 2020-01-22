@@ -19,6 +19,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
+    kgio (2.11.3)
     mini_portile2 (2.4.0)
     minitest (5.14.0)
     mongo (2.11.2)
@@ -40,6 +41,7 @@ GEM
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
+    raindrops (0.19.1)
     rspec (3.9.0)
       rspec-core (~> 3.9.0)
       rspec-expectations (~> 3.9.0)
@@ -72,6 +74,9 @@ GEM
     tilt (2.0.10)
     tzinfo (1.2.6)
       thread_safe (~> 0.1)
+    unicorn (5.5.2)
+      kgio (~> 2.6)
+      raindrops (~> 0.7)
     zeitwerk (2.2.2)
 
 PLATFORMS
@@ -88,6 +93,7 @@ DEPENDENCIES
   sinatra
   sinatra-contrib
   sinatra-strong-params
+  unicorn
 
 BUNDLED WITH
    1.17.2

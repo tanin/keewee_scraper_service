@@ -9,11 +9,11 @@ gem 'sinatra-contrib'
 gem 'nokogiri'
 gem 'open_graph_reader'
 gem 'sinatra-strong-params', require: 'sinatra/strong-params'
+gem 'unicorn'
 
 group :development, :test do
   gem 'byebug'
 end
-
 
 group :test do
   gem 'rack-test'
