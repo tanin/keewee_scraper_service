@@ -36,7 +36,7 @@ GEM
     open_graph_reader (0.7.0)
       faraday (>= 0.9.0)
       nokogiri (~> 1.6)
-    rack (2.1.1)
+    rack (2.2.3)
     rack-protection (2.0.8.1)
       rack
     rack-test (1.1.0)
